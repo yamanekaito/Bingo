@@ -23,35 +23,53 @@
     return column
   } 
 
-  const columns = [];
-  columns[0] = createColumn(0);
-  columns[1] = createColumn(1);
-  columns[2] = createColumn(2);
-  columns[3] = createColumn(3);
-  columns[4] = createColumn(4);
-  columns[2][2] = "FREE";
+  function createColumns() {
+    const columns = [];
+    // columns[0] = createColumn(0);
+    // columns[1] = createColumn(1);
+    // columns[2] = createColumn(2);
+    // columns[3] = createColumn(3);
+    // columns[4] = createColumn(4);
+
+    for (let i=0;i < 5;i++ ) {
+      columns[i] = createColumn(i);
+    }
+    columns[2][2] = "FREE";
+    return columns;
+  }
+
 
   // console.table(columns);
   //table図のように表示する
   //ここでは行と列が反対
 
-  const bingo = [];
-  for (let row = 0;row < 5;row ++ ) {
-    bingo[row] = [];
-    for (let col = 0; col < 5; col ++ ) {
-      bingo[row][col] = columns[col][row];
-    }
-  }
-  console.table(bingo);
+  // function createBingo(columns) {
+  //   const bingo = [];
+  //   for (let row = 0;row < 5;row ++ ) {
+  //     bingo[row] = [];
+  //     for (let col = 0; col < 5; col ++ ) {
+  //       bingo[row][col] = columns[col][row];
+  //     }
+  //   }
+  //   // console.table(bingo);
+  //   return bingo;
+  // }
 
-  for (let row = 0;row < 5;row ++) {
-    const tr = document.createElement('tr');
-    for (let col = 0;col < 5;col++) {
-      const td = document.createElement('td');
-      td.textContent = bingo[row][col]
-      tr.appendChild(td);
+  function renderBingo(columns) {
+    for (let row = 0;row < 5;row ++) {
+      const tr = document.createElement('tr');
+      for (let col = 0;col < 5;col++) {
+        const td = document.createElement('td');
+        // td.textContent = bingo[row][col]
+        td.textContent = columns[col][row]
+        tr.appendChild(td);
+      }
+      document.querySelector('tbody').appendChild(tr);
     }
-    document.querySelector('tbody').appendChild(tr);
   }
+
+  const columns = createColumns() ;
+  // const bingo = createBingo(columns);
+  renderBingo(columns);
 
 }
